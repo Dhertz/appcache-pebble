@@ -1,7 +1,7 @@
 Pebble.addEventListener("showConfiguration",
                      function(e) {
                      	console.log("showConfiguration");
-                        Pebble.openURL("http://192.168.1.13:8000");
+                        Pebble.openURL("http://dhertz.github.io/appcache-pebble");
 					 });
 
 Pebble.addEventListener("webviewclosed",
