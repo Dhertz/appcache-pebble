@@ -1,7 +1,7 @@
 #include <pebble.h>
 
 static Window *window;
-static TextLayer *text_layer;
+static TextLayer *text_layer, *title_layer;
 
 static AppSync sync;
 static uint8_t sync_buffer[32];
@@ -24,7 +24,11 @@ static void window_load(Window *window) {
   GRect bounds = layer_get_bounds(window_layer);
 
   text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
-  text_layer_set_text(text_layer, "Config Status:");
+  title_layer = text_layer_create((GRect) { .origin = { 0, 55 }, .size = { bounds.size.w, 20 } });
+  text_layer_set_text(title_layer, "Config Status:");
+  text_layer_set_text_alignment(title_layer, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(title_layer));
+
   text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(text_layer));
 
