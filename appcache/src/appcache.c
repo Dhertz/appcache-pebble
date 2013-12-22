@@ -11,6 +11,7 @@ enum SettingsKey {
 };
 
 static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tuple, const Tuple* old_tuple, void* context) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Test key chamged to: %u", (uint) new_tuple->value->uint8);
   char* text = new_tuple->value->uint8 ? "Enabled" : "Disabled";
   text_layer_set_text(text_layer, text);
 }
@@ -25,6 +26,7 @@ static void window_load(Window *window) {
 
   text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
   title_layer = text_layer_create((GRect) { .origin = { 0, 55 }, .size = { bounds.size.w, 20 } });
+
   text_layer_set_text(title_layer, "Config Status:");
   text_layer_set_text_alignment(title_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(title_layer));
