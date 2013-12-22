@@ -1,0 +1,18 @@
+{
+  "uuid": "8497180a-0236-4055-933d-6487f2d7790f",
+  "shortName": "appcache",
+  "longName": "appcache",
+  "capabilities": [ "configurable" ],
+  "companyName": "Daniel Hertz",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {
+    "test": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
