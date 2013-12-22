@@ -1,0 +1,51 @@
+<html manifest="index.appcache">
+<head>
+	<title>Pebble Watchface customizer</title>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<h3 style='padding-bottom:10px'>Choose your options!</h3>
+	<p>
+		<button type='button'class="option btn btn-default" id="test">test</button>
+	</p>
+	<p>
+		<button type='button' class="submit btn btn-success">Submit</button>
+	</p>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$().ready(function() {
+			window.applicationCache.addEventListener('updateready', onUpdateReady);
+			function onUpdateReady() {
+				if(window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+  					window.location.reload();
+  				}
+			}
+			var dictionary;
+			try {
+				dictionary = JSON.parse(localStorage["dictionary"]);
+			}
+			catch(e) {
+				dictionary = {'test':0};
+			}
+			for(option in dictionary) {
+				if(dictionary[option])
+					$("#" + option).addClass("btn-primary");
+			};
+		    $(".option").click(function(){
+		    	var new_val = dictionary[$(this).attr("id")] + 1;
+		        dictionary[$(this).attr("id")] = new_val % 2;
+		        localStorage["dictionary"] = JSON.stringify(dictionary);
+		        $(this).toggleClass("btn-primary");
+		    });
+
+		    $('.submit').click(function() {
+		    	var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(dictionary));
+				window.location.href = location;
+		    });
+		});
+	</script>
+</body>
+</html>
+
